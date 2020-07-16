@@ -1,6 +1,8 @@
 package com.hyunje.fds.log;
 
-public class RegisterLog {
+import com.hyunje.fds.JSONSerdeCompatible;
+
+public class RegisterLog implements JSONSerdeCompatible {
     private String userId;
     private String userName;
     private String birthDate;
