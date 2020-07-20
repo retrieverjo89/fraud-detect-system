@@ -27,11 +27,11 @@ public class RedisClientTest {
         return registerUserLogPrefix + uid;
     }
 
-    public String getCreateLogId(String accId){
+    public String getCreateLogId(String accId) {
         return createAccountLogPrefix + accId;
     }
 
-    public void setRegisterLogToRedis(){
+    public void setRegisterLogToRedis() {
         Jedis redis = new Jedis(redisHost, redisPort);
         Map<String, String> regValMap = new HashMap<>();
         regValMap.put("userId", userId);
@@ -42,12 +42,12 @@ public class RedisClientTest {
         redis.hset(getRegisterLogId(userId), regValMap);
     }
 
-    public void deleteRegisterLog(){
+    public void deleteRegisterLog() {
         Jedis redis = new Jedis(redisHost, redisPort);
         redis.del(getRegisterLogId(userId));
     }
 
-    public void setCreateAccountLogToRedis(){
+    public void setCreateAccountLogToRedis() {
         Jedis redis = new Jedis(redisHost, redisPort);
         Map<String, String> accLValMap = new HashMap<>();
         accLValMap.put("userId", userId);
@@ -57,7 +57,7 @@ public class RedisClientTest {
         redis.hset(getCreateLogId(accountId), accLValMap);
     }
 
-    public void deleteCreateAccountLog(){
+    public void deleteCreateAccountLog() {
         Jedis redis = new Jedis(redisHost, redisPort);
         redis.del(getCreateLogId(accountId));
     }

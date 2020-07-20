@@ -3,8 +3,6 @@ package com.hyunje.fds;
 import com.hyunje.fds.log.Constants;
 import redis.clients.jedis.Jedis;
 
-import java.util.HashMap;
-
 public class RedisTest {
     public static void main(String[] args) {
         String redisHost = "172.16.40.3";

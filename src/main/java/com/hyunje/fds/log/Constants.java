@@ -36,5 +36,6 @@ public final class Constants {
     public static final String EVALUATOR_STREAM_APP_ID = "fds.evaluator";
     public static final String DETECTED_FRAUD_TOPIC = "fds.detections";
 
-    private Constants() {}
+    private Constants() {
+    }
 }

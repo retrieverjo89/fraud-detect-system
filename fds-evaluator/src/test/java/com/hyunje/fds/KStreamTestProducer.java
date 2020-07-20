@@ -1,9 +1,6 @@
 package com.hyunje.fds;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hyunje.fds.log.FinanceTransactionLog;
-import com.hyunje.fds.log.RegisterLog;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -11,8 +8,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 public class KStreamTestProducer {
-    private final static String BOOTSTRAP_SERVER = "172.16.40.3:9092";
-    private final static String STREAM_TEST_SRC_TOPIC = "stream-src-topic";
+    private static final String BOOTSTRAP_SERVER = "172.16.40.3:9092";
+    private static final String STREAM_TEST_SRC_TOPIC = "stream-src-topic";
 
     public static void main(String[] args) throws InterruptedException, ExecutionException, JsonProcessingException {
         Properties props = new Properties();
@@ -23,7 +20,7 @@ public class KStreamTestProducer {
 
         Producer<String, String> producer = new KafkaProducer<>(props);
 
-        ProducerRecord<String, String> record = new ProducerRecord<>(STREAM_TEST_SRC_TOPIC,"test-key", "test-value");
+        ProducerRecord<String, String> record = new ProducerRecord<>(STREAM_TEST_SRC_TOPIC, "test-key", "test-value");
 
         long time = System.currentTimeMillis();
         RecordMetadata metadata = producer.send(record).get();

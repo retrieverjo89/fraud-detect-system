@@ -1,6 +1,5 @@
 package com.hyunje.fds.log;
 
-import com.hyunje.fds.log.*;
 //import java.time.LocalDateTime;
 //import java.time.format.DateTimeFormatter;
 
@@ -52,7 +51,7 @@ public class LogMaker {
     }
 
     public TransferLog makeTransferLog(String userId, String fromAccountId, String toBankName, String toBankAccountId,
-                                     String toBankUserName, int amount, String tradeTime) {
+                                       String toBankUserName, int amount, String tradeTime) {
         TransferLog transferLog = new TransferLog();
         transferLog.setUserId(userId);
         transferLog.setAccountId(fromAccountId);

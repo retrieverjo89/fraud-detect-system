@@ -9,7 +9,7 @@ public class UserNameGenerator extends AbstractStringGenerator {
         this.MAX_NAME_LEN = 16;
     }
 
-    public UserNameGenerator(int maxlen){
+    public UserNameGenerator(int maxlen) {
         this.MAX_NAME_LEN = maxlen;
     }
 }

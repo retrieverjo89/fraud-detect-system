@@ -13,7 +13,8 @@ public class JSONSerde<T extends JSONSerdeCompatible> implements Serializer<T>, 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override
-    public void configure(final Map<String, ?> configs, final boolean isKey) {}
+    public void configure(final Map<String, ?> configs, final boolean isKey) {
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -43,7 +44,8 @@ public class JSONSerde<T extends JSONSerdeCompatible> implements Serializer<T>, 
     }
 
     @Override
-    public void close() {}
+    public void close() {
+    }
 
     @Override
     public Serializer<T> serializer() {

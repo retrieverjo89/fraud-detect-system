@@ -11,7 +11,7 @@ public abstract class AbstractIntGenerator implements RandomGenerator<Integer> {
     protected static int MAX_DIGIT = 100;
 
     @Override
-    public Integer generate(){
+    public Integer generate() {
         return random.nextInt(MAX_DIGIT) * MULTIPLIER;
     }
 

@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogMaker {
+    private static String TARGET_TOPIC;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final UserIdGenerator userIdGenerator = new UserIdGenerator(8);
     private final UserNameGenerator userNameGenerator = new UserNameGenerator(4);
     private final AccountIdGenerator accountIdGenerator = new AccountIdGenerator(8);
-    private static String TARGET_TOPIC;
-    public LogMaker(String targetTopic){
+
+    public LogMaker(String targetTopic) {
         TARGET_TOPIC = targetTopic;
     }
 
@@ -112,7 +113,7 @@ public class LogMaker {
         ProducerRecord<String, FinanceTransactionLog> createAccRecord = makeCreateAccountLog(userId, accId, createAccTime);
         recordList.add(createAccRecord);
 
-        for(String depTime : depositTimeList){
+        for (String depTime : depositTimeList) {
             ProducerRecord<String, FinanceTransactionLog> depositRecord = makeDepositLog(userId, accId, 100, depTime);
             recordList.add(depositRecord);
         }
@@ -151,7 +152,7 @@ public class LogMaker {
         ProducerRecord<String, FinanceTransactionLog> createAccRecord = makeCreateAccountLog(userId, accId, createAccTime);
         recordList.add(createAccRecord);
 
-        for(String depTime : depositTimeList){
+        for (String depTime : depositTimeList) {
             ProducerRecord<String, FinanceTransactionLog> depositRecord = makeDepositLog(userId, accId, 150, depTime);
             recordList.add(depositRecord);
         }

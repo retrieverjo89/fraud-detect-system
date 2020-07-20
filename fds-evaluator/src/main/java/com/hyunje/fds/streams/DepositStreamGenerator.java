@@ -12,11 +12,15 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
 public class DepositStreamGenerator implements Runnable {
+    public static final Logger logger = LogManager.getLogger(DepositStreamGenerator.class);
 
     @Override
     public void run() {
@@ -40,7 +44,7 @@ public class DepositStreamGenerator implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Starting exit " + this.getClass().getSimpleName() +"...");;
+            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
             depositConsumer.wakeup();
             try {
                 mainThread.join();
@@ -59,22 +63,22 @@ public class DepositStreamGenerator implements Runnable {
                     streamLog.setAccountId(accId);
                     streamLog.setTimestamp(log.getTradeTime());
                     streamLog.setTransactionAmount(log.getAmount());
-                    System.out.printf("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime());
+                    logger.info(String.format("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
 
                     ProducerRecord<String, TransactionStreamLog> streamRecord = new ProducerRecord<>(Constants.DEPOSIT_LOG_STREAM_TOPIC, accId, streamLog);
 
                     streamLogProducer.send(streamRecord);
-                    System.out.println(", and sent to " + Constants.DEPOSIT_LOG_STREAM_TOPIC);
+                    logger.info("Sent to " + Constants.DEPOSIT_LOG_STREAM_TOPIC);
                 }
             }
         } catch (WakeupException wakeupException) {
 
         } finally {
-            System.out.println(this.getClass().getSimpleName() + " is trying to close!");
+            logger.info(this.getClass().getSimpleName() + " is trying to close!");
             streamLogProducer.close();
             depositConsumer.commitSync();
             depositConsumer.close();
-            System.out.println("Closed " + this.getClass().getSimpleName());
+            logger.info("Closed " + this.getClass().getSimpleName());
         }
 
     }

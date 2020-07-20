@@ -31,7 +31,7 @@ public class TransactionStreamLog implements JSONSerdeCompatible {
         this.timestamp = timestamp;
     }
 
-    public String toString(){
+    public String toString() {
         return String.format("AccId: %s, Amount: %d, TransTime: %s", accountId, transactionAmount, timestamp);
     }
 }

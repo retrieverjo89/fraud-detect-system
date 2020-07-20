@@ -1,8 +1,6 @@
 package com.hyunje.fds.streams;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hyunje.fds.log.Constants;
-import com.hyunje.fds.log.DepositLog;
 import com.hyunje.fds.log.TransactionStreamLog;
 import com.hyunje.fds.log.WithdrawLog;
 import com.hyunje.fds.serdes.JSONSerde;
@@ -14,12 +12,15 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
 public class WithdrawStreamGenerator implements Runnable {
+    public static final Logger logger = LogManager.getLogger(WithdrawStreamGenerator.class);
 
     @Override
     public void run() {
@@ -43,7 +44,7 @@ public class WithdrawStreamGenerator implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Starting exit " + this.getClass().getSimpleName() +"...");;
+            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
             withdrawConsumer.wakeup();
             try {
                 mainThread.join();
@@ -62,22 +63,21 @@ public class WithdrawStreamGenerator implements Runnable {
                     streamLog.setAccountId(accId);
                     streamLog.setTimestamp(log.getTradeTime());
                     streamLog.setTransactionAmount(log.getAmount() * -1);
-                    System.out.printf("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime());
-
+                    logger.info(String.format("Received record of deposit, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
                     ProducerRecord<String, TransactionStreamLog> streamRecord = new ProducerRecord<>(Constants.WITHDRAW_LOG_STREAM_TOPIC, accId, streamLog);
 
                     streamLogProducer.send(streamRecord);
-                    System.out.println(", and sent to " + Constants.WITHDRAW_LOG_STREAM_TOPIC + " amount: " + streamLog.getTransactionAmount());
+                    logger.info("Send to " + Constants.WITHDRAW_LOG_STREAM_TOPIC + " amount: " + streamLog.getTransactionAmount());
                 }
             }
         } catch (WakeupException wakeupException) {
 
         } finally {
-            System.out.println(this.getClass().getSimpleName() + " is trying to close!");
+            logger.info(this.getClass().getSimpleName() + " is trying to close!");
             streamLogProducer.close();
             withdrawConsumer.commitSync();
             withdrawConsumer.close();
-            System.out.println("Closed " + this.getClass().getSimpleName());
+            logger.info("Closed " + this.getClass().getSimpleName());
         }
     }
 }
