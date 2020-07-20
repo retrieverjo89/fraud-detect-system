@@ -8,12 +8,15 @@ import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
 public class FraudDetector implements Runnable {
+    public static final Logger logger = LogManager.getLogger(FraudDetector.class);
     private final String RESULT_TOPIC = Constants.DETECTED_FRAUD_TOPIC;
     private final String CONSUMER_GROUP = "FDS_DETECTION_CONSUMER";
     private final RedisClient redisClient = new RedisClient(Constants.REDIS_SERVER, Constants.REDIS_PORT);
@@ -33,7 +36,7 @@ public class FraudDetector implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Starting exit " + this.getClass().getSimpleName() + "...");
+            logger.error("Starting exit " + this.getClass().getSimpleName() + "...");
 
             resultConsumer.wakeup();
             try {
@@ -50,16 +53,16 @@ public class FraudDetector implements Runnable {
                     String accId = record.key();
                     CreateAccountLog userInfo = redisClient.getCreatedAccountInfo(accId);
                     RegisterLog regInfo = redisClient.getRegisteredUserInfo(userInfo.getUserId());
-                    System.out.printf("User %s(%s)'s account %s was detected as FRAUD!\n", regInfo.getUserName(), userInfo.getUserId(), accId);
+                    logger.error(String.format("User %s(%s)'s account %s was detected as FRAUD!\n", regInfo.getUserName(), userInfo.getUserId(), accId));
                 }
             }
         } catch (WakeupException wakeupException) {
 
         } finally {
-            System.out.println(this.getClass().getSimpleName() + " is trying to close!");
+            logger.error(this.getClass().getSimpleName() + " is trying to close!");
             resultConsumer.commitSync();
             resultConsumer.close();
-            System.out.println("Closed " + this.getClass().getSimpleName());
+            logger.error("Closed " + this.getClass().getSimpleName());
         }
 
     }
