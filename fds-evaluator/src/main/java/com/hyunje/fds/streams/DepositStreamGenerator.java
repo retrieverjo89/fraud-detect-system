@@ -44,7 +44,7 @@ public class DepositStreamGenerator implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
+            logger.error("Starting exit " + this.getClass().getSimpleName() + "...");
             depositConsumer.wakeup();
             try {
                 mainThread.join();
@@ -63,22 +63,22 @@ public class DepositStreamGenerator implements Runnable {
                     streamLog.setAccountId(accId);
                     streamLog.setTimestamp(log.getTradeTime());
                     streamLog.setTransactionAmount(log.getAmount());
-                    logger.info(String.format("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
+                    logger.error(String.format("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
 
                     ProducerRecord<String, TransactionStreamLog> streamRecord = new ProducerRecord<>(Constants.DEPOSIT_LOG_STREAM_TOPIC, accId, streamLog);
 
                     streamLogProducer.send(streamRecord);
-                    logger.info("Sent to " + Constants.DEPOSIT_LOG_STREAM_TOPIC);
+                    logger.error("Sent to " + Constants.DEPOSIT_LOG_STREAM_TOPIC);
                 }
             }
         } catch (WakeupException wakeupException) {
 
         } finally {
-            logger.info(this.getClass().getSimpleName() + " is trying to close!");
+            logger.error(this.getClass().getSimpleName() + " is trying to close!");
             streamLogProducer.close();
             depositConsumer.commitSync();
             depositConsumer.close();
-            logger.info("Closed " + this.getClass().getSimpleName());
+            logger.error("Closed " + this.getClass().getSimpleName());
         }
 
     }

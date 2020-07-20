@@ -44,7 +44,7 @@ public class TransferStreamGenerator implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
+            logger.error("Starting exit " + this.getClass().getSimpleName() + "...");
             transferConsumer.wakeup();
             try {
                 mainThread.join();
@@ -63,22 +63,22 @@ public class TransferStreamGenerator implements Runnable {
                     streamLog.setAccountId(accId);
                     streamLog.setTimestamp(log.getTradeTime());
                     streamLog.setTransactionAmount(log.getAmount() * -1);
-                    logger.info(String.format("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
+                    logger.error(String.format("Received record of DepositLog, %s, %d, %s", accId, log.getAmount(), log.getTradeTime()));
 
                     ProducerRecord<String, TransactionStreamLog> streamRecord = new ProducerRecord<>(Constants.TRANSFER_LOG_STREAM_TOPIC, accId, streamLog);
 
                     streamLogProducer.send(streamRecord);
-                    logger.info("Sent to " + Constants.TRANSFER_LOG_STREAM_TOPIC + " amount: " + streamLog.getTransactionAmount());
+                    logger.error("Sent to " + Constants.TRANSFER_LOG_STREAM_TOPIC + " amount: " + streamLog.getTransactionAmount());
                 }
             }
         } catch (WakeupException wakeupException) {
 
         } finally {
-            logger.info(this.getClass().getSimpleName() + " is trying to close!");
+            logger.error(this.getClass().getSimpleName() + " is trying to close!");
             streamLogProducer.close();
             transferConsumer.commitSync();
             transferConsumer.close();
-            logger.info("Closed " + this.getClass().getSimpleName());
+            logger.error("Closed " + this.getClass().getSimpleName());
         }
     }
 }

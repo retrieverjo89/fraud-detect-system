@@ -98,7 +98,7 @@ public class LogMaker {
         String userName = userNameGenerator.generate();
         String userBirthDate = "19591001";
         String registerTime = "20200720090000";
-        String createAccTime = "20200719100000";
+        String createAccTime = "20200720100000";
         String accId = accountIdGenerator.generate();
         List<String> depositTimeList = new ArrayList<>();
         depositTimeList.add("20200719101000");

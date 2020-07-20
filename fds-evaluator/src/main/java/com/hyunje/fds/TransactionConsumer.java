@@ -54,7 +54,7 @@ public class TransactionConsumer implements Runnable {
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
+            logger.error("Starting exit " + this.getClass().getSimpleName() + "...");
             transactionConsumer.wakeup();
             try {
                 mainThread.join();
@@ -69,35 +69,35 @@ public class TransactionConsumer implements Runnable {
                 for (ConsumerRecord<String, FinanceTransactionLog> record : records) {
                     String logType = record.key();
                     String jsonString = record.value().getJsonString();
-                    logger.info(String.format("TransactionConsumer got %s log", logType));
+                    logger.error(String.format("TransactionConsumer got %s log", logType));
                     switch (logType) {
                         case "register":
                             RegisterLog regLog = OBJECT_MAPPER.readValue(jsonString, RegisterLog.class);
                             redisClient.setRegisterUserLog(regLog);
-                            logger.info("Saved register log to redis");
+                            logger.error("Saved register log to redis");
                             break;
                         case "create-account":
                             CreateAccountLog createAccLog = OBJECT_MAPPER.readValue(jsonString, CreateAccountLog.class);
                             redisClient.setCreateAccountLog(createAccLog);
-                            logger.info("Saved create account log to redis");
+                            logger.error("Saved create account log to redis");
                             break;
                         case "deposit":
                             DepositLog depositLog = OBJECT_MAPPER.readValue(jsonString, DepositLog.class);
                             ProducerRecord<String, DepositLog> depositRecord = new ProducerRecord<>(DEPOSIT_SRC_TOPIC, depositLog.getAccountId(), depositLog);
                             depositLogProducer.send(depositRecord);
-                            logger.info(String.format("Send deposit log to topic %s\n", DEPOSIT_SRC_TOPIC));
+                            logger.error(String.format("Send deposit log to topic %s", DEPOSIT_SRC_TOPIC));
                             break;
                         case "withdraw":
                             WithdrawLog withdrawLog = OBJECT_MAPPER.readValue(jsonString, WithdrawLog.class);
                             ProducerRecord<String, WithdrawLog> withdrawRecord = new ProducerRecord<>(WITHDRAW_SRC_TOPIC, withdrawLog.getAccountId(), withdrawLog);
                             withdrawLogProducer.send(withdrawRecord);
-                            logger.info(String.format("Send withdraw log to topic %s\n", WITHDRAW_SRC_TOPIC));
+                            logger.error(String.format("Send withdraw log to topic %s", WITHDRAW_SRC_TOPIC));
                             break;
                         case "transfer":
                             TransferLog transferLog = OBJECT_MAPPER.readValue(jsonString, TransferLog.class);
                             ProducerRecord<String, TransferLog> transferRecord = new ProducerRecord<>(TRANSFER_SRC_TOPIC, transferLog.getAccountId(), transferLog);
                             transferLogProducer.send(transferRecord);
-                            logger.info(String.format("Send transfer log to topic %s\n", TRANSFER_SRC_TOPIC));
+                            logger.error(String.format("Send transfer log to topic %s", TRANSFER_SRC_TOPIC));
                             break;
                         default:
                             logger.error("Wrong type of log");
@@ -110,14 +110,14 @@ public class TransactionConsumer implements Runnable {
         } catch (WakeupException wakeupException) {
 
         } finally {
-            logger.info(this.getClass().getSimpleName() + " is trying to close!");
+            logger.error(this.getClass().getSimpleName() + " is trying to close!");
             depositLogProducer.close();
             withdrawLogProducer.close();
             transferLogProducer.close();
 
             transactionConsumer.commitSync();
             transactionConsumer.close();
-            logger.info("Closed " + this.getClass().getSimpleName());
+            logger.error("Closed " + this.getClass().getSimpleName());
         }
     }
 }

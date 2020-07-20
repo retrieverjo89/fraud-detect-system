@@ -2,6 +2,7 @@ package com.hyunje.fds;
 
 import com.hyunje.fds.log.Constants;
 import com.hyunje.fds.log.CreateAccountLog;
+import com.hyunje.fds.log.RegisterLog;
 import com.hyunje.fds.redis.RedisClient;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.errors.WakeupException;
@@ -48,7 +49,8 @@ public class FraudDetector implements Runnable {
                 for (ConsumerRecord<String, Integer> record : records) {
                     String accId = record.key();
                     CreateAccountLog userInfo = redisClient.getCreatedAccountInfo(accId);
-                    System.out.printf("User %s's account %s was detected as FRAUD!\n", userInfo.getUserId(), accId);
+                    RegisterLog regInfo = redisClient.getRegisteredUserInfo(userInfo.getUserId());
+                    System.out.printf("User %s(%s)'s account %s was detected as FRAUD!\n", regInfo.getUserName(), userInfo.getUserId(), accId);
                 }
             }
         } catch (WakeupException wakeupException) {

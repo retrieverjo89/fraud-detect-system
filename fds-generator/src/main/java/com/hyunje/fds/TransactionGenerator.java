@@ -22,7 +22,7 @@ public class TransactionGenerator implements Runnable {
     private static void sendRecord(Producer<String, FinanceTransactionLog> producer, List<ProducerRecord<String, FinanceTransactionLog>> recordList) throws InterruptedException, ExecutionException {
         for (ProducerRecord<String, FinanceTransactionLog> record : recordList) {
             producer.send(record).get();
-            logger.info(String.format("Generate log type: %s, json: %s", record.value().getLogType(), record.value().getJsonString()));
+            logger.error(String.format("Generate log type: %s, json: %s", record.value().getLogType(), record.value().getJsonString()));
         }
     }
 
@@ -37,19 +37,18 @@ public class TransactionGenerator implements Runnable {
         Producer<String, FinanceTransactionLog> producer = new KafkaProducer<>(props);
 
         try {
-            List<ProducerRecord<String, FinanceTransactionLog>> fraudRecordList = logMaker.makeFraudLogs();
-            sendRecord(producer, fraudRecordList);
-            Thread.sleep(1000);
-
             List<ProducerRecord<String, FinanceTransactionLog>> nonFraudRecordList = logMaker.makeNonFraudLogs();
             sendRecord(producer, nonFraudRecordList);
+
+            List<ProducerRecord<String, FinanceTransactionLog>> fraudRecordList = logMaker.makeFraudLogs();
+            sendRecord(producer, fraudRecordList);
         } catch (InterruptedException | ExecutionException | JsonProcessingException e) {
             e.printStackTrace();
         }
         final Thread mainThread = Thread.currentThread();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.info("Starting exit " + this.getClass().getSimpleName() + "...");
+            logger.error("Starting exit " + this.getClass().getSimpleName() + "...");
             try {
                 mainThread.join();
             } catch (InterruptedException e) {

@@ -52,28 +52,28 @@ public class TransactionEvaluator implements Runnable {
         KStream<String, TransactionStreamLog> depositStream = streamsBuilder.stream(Constants.DEPOSIT_LOG_STREAM_TOPIC,
                 Consumed.with(Serdes.String(), streamLogSerde));
 //        depositStream.foreach(
-//                (key, value) -> logger.info("AccId: " + key + " Deposited: " + value.getTransactionAmount() + " At " + value.getTimestamp())
+//                (key, value) -> logger.error("AccId: " + key + " Deposited: " + value.getTransactionAmount() + " At " + value.getTimestamp())
 //        );
 
         KStream<String, TransactionStreamLog> withdrawAndTransferStream = streamsBuilder.stream(Constants.WITHDRAW_AND_TRANSFER_LOG_STREAM_TOPIC,
                 Consumed.with(Serdes.String(), streamLogSerde));
 
 //        withdrawAndTransferStream.foreach(
-//                (key, value) -> logger.info("AccId: " + key + " Transferred: " + value.getTransactionAmount() + " At " + value.getTimestamp())
+//                (key, value) -> logger.error("AccId: " + key + " Transferred: " + value.getTransactionAmount() + " At " + value.getTimestamp())
 //        );
 
         KStream<String, TransactionStreamLog> groupedDeposit = depositStream
                 .filter((key, value) -> {
-                    logger.debug("Filter by user age, " + key + ", " + value);
+                    logger.error("Filter by user age, " + key + ", " + value);
                     String userId = redisClient.getCreatedAccountInfo(value.getAccountId(), "userId");
                     String birth = redisClient.getRegisteredUserInfo(userId, "birthDate");
                     LocalDate birthDate = LocalDate.parse(birth, birthDateFormatter);
                     long age = ChronoUnit.YEARS.between(birthDate, nowDate);
-                    logger.debug(String.format("User: %s -> Age: %d", userId, age));
+                    logger.error(String.format("User: %s -> Age: %d", userId, age));
                     return age >= AGE_FILTER;
                 })
                 .filter((key, value) -> {
-                    logger.debug("Filter by created account time, " + key + ", " + value);
+                    logger.error("Filter by created account time, " + key + ", " + value);
                     String accCreated = redisClient.getCreatedAccountInfo(key, "tradeTime");
 
                     LocalDateTime createdTime = LocalDateTime.parse(accCreated, fDateFormatter);
@@ -81,7 +81,7 @@ public class TransactionEvaluator implements Runnable {
 
                     long created = ChronoUnit.HOURS.between(createdTime, transactionTime);
                     boolean div = created <= CREATED_ACCOUNT_WITHIN_HOUR;
-                    logger.debug(String.format("Account created %d hours ago", created));
+                    logger.error(String.format("Account created %d hours ago", created));
                     return div;
                 })
                 .groupByKey()
@@ -93,12 +93,12 @@ public class TransactionEvaluator implements Runnable {
                     reducedLog.setTransactionAmount(totalAmount);
                     reducedLog.setAccountId(aggLog.getAccountId());
                     reducedLog.setTimestamp(newLog.getTimestamp());
-                    logger.debug("Reduced to " + totalAmount);
+                    logger.error("Reduced to " + totalAmount);
                     return reducedLog;
                 })
                 // 최종 결과: 48시간 이내의 총 입금액과, 계좌 아이디, 100만원을 넘긴 최종 입금 시간, 합이 100만원 이하인 경우에는 자동으로 제외되기 때문에 timestamp는 체크하지 않아도 됨.
                 .filter(((key, value) -> {
-                    logger.debug("total deposited amount: " + value.getTransactionAmount());
+                    logger.error("total deposited amount: " + value.getTransactionAmount());
                     return value.getTransactionAmount() >= DEPOSIT_TOTAL_THRESHOLD;
                 }))
                 .toStream()
@@ -113,7 +113,7 @@ public class TransactionEvaluator implements Runnable {
                     reducedLog.setTransactionAmount(totalAmount);
                     reducedLog.setAccountId(aggLog.getAccountId());
                     reducedLog.setTimestamp(newLog.getTimestamp());
-                    logger.debug("Total transferred: " + totalAmount);
+                    logger.error("Total transferred: " + totalAmount);
                     return reducedLog;
                 })
                 .toStream()
@@ -122,19 +122,19 @@ public class TransactionEvaluator implements Runnable {
 
         groupedDeposit.foreach(
                 ((key, value) -> {
-                    logger.debug(String.format("groupedDeposit key: %s, value: %s", key, value));
+                    logger.error(String.format("groupedDeposit key: %s, value: %s", key, value));
                 })
         );
         groupedWithdrawAndTransfer.foreach(
                 ((key, value) -> {
-                    logger.debug(String.format("groupedWithdrawAndTransfer key: %s, value: %s", key, value));
+                    logger.error(String.format("groupedWithdrawAndTransfer key: %s, value: %s", key, value));
                 })
         );
 
         KStream<String, Integer> detectStream = groupedDeposit
                 .join(groupedWithdrawAndTransfer,
                         (deposit, transfer) -> {
-                            logger.debug("join deposit: " + deposit + ", transfer: " + transfer);
+                            logger.error("join deposit: " + deposit + ", transfer: " + transfer);
                             return deposit.getTransactionAmount() + transfer.getTransactionAmount();
                         },
                         JoinWindows.of(Duration.ofHours(2)),
@@ -148,9 +148,9 @@ public class TransactionEvaluator implements Runnable {
                 .foreach(
                         (accId, balance) -> {
                             if (balance <= FRAUD_DETECT_THRESHOLD)
-                                logger.info(String.format("ACCOUNT ID %s DETECTED AS ABNORMAL!", accId));
+                                logger.error(String.format("ACCOUNT ID %s DETECTED AS FRAUD!", accId));
                             else
-                                logger.info(String.format("ACCOUNT ID %s IS NORMAL!", accId));
+                                logger.error(String.format("ACCOUNT ID %s IS NON-FRAUD!", accId));
                         }
                 );
 
@@ -178,9 +178,9 @@ public class TransactionEvaluator implements Runnable {
         } catch (WakeupException | InterruptedException wakeupException) {
 
         } finally {
-            logger.info(this.getClass().getSimpleName() + " is trying to close!");
+            logger.error(this.getClass().getSimpleName() + " is trying to close!");
             evaluatorStreams.close();
-            logger.info("Closed " + this.getClass().getSimpleName());
+            logger.error("Closed " + this.getClass().getSimpleName());
         }
     }
 }
