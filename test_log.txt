@@ -1,105 +1,117 @@
-22:35:05.414 [main] ERROR com.hyunje.fds.FdsSystemApp - Start fds system
-22:35:05.682 [main] ERROR com.hyunje.fds.FdsSystemApp - Finished start every components
-22:35:06.398 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: register, json: {"_t":"RegisterLog","userId":"5173735230","userName":"KRU1","birthDate":"19561001","registerTime":"20200720010000"}
-22:35:06.412 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: create-account, json: {"_t":"CreateAccountLog","userId":"5173735230","accountId":"56225010","tradeTime":"20200720103000"}
-22:35:06.421 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5173735230","accountId":"56225010","amount":150,"tradeTime":"20200720104000"}
-22:35:06.431 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5173735230","accountId":"56225010","amount":150,"tradeTime":"20200720104500"}
-22:35:06.438 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5173735230","accountId":"56225010","amount":150,"tradeTime":"20200720113000"}
-22:35:06.445 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: withdraw, json: {"_t":"withdraw","userId":"5173735230","accountId":"56225010","amount":30,"tradeTime":"20200720201100"}
-22:35:06.452 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: transfer, json: {"_t":"transfer","userId":"5173735230","accountId":"56225010","toBankName":null,"toBankAccountId":null,"toBankUserName":null,"amount":100,"tradeTime":"20200720201000"}
-22:35:06.460 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: register, json: {"_t":"RegisterLog","userId":"8215169423","userName":"tMyH","birthDate":"19591001","registerTime":"20200720090000"}
-22:35:06.466 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: create-account, json: {"_t":"CreateAccountLog","userId":"8215169423","accountId":"44473605","tradeTime":"20200720100000"}
-22:35:06.474 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"8215169423","accountId":"44473605","amount":100,"tradeTime":"20200719101000"}
-22:35:06.482 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"8215169423","accountId":"44473605","amount":100,"tradeTime":"20200719102000"}
-22:35:06.496 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"8215169423","accountId":"44473605","amount":100,"tradeTime":"20200720090000"}
-22:35:06.504 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: withdraw, json: {"_t":"withdraw","userId":"8215169423","accountId":"44473605","amount":100,"tradeTime":"20200720100000"}
-22:35:06.510 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: transfer, json: {"_t":"transfer","userId":"8215169423","accountId":"44473605","toBankName":null,"toBankAccountId":null,"toBankUserName":null,"amount":200,"tradeTime":"20200720101000"}
-22:35:06.603 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got register log
-22:35:06.646 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved register log to redis
-22:35:06.646 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got create-account log
-22:35:06.656 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved create account log to redis
-22:35:06.656 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.688 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.688 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.689 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.689 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.690 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.690 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got withdraw log
-22:35:06.698 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 56225010, 150, 20200720104000
-22:35:06.712 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send withdraw log to topic fds.withdraw.src
-22:35:06.712 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got transfer log
-22:35:06.718 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.720 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 56225010, 150, 20200720104500
-22:35:06.721 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.721 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 56225010, 150, 20200720113000
-22:35:06.721 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.722 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Received record of deposit, 56225010, 30, 20200720201100
-22:35:06.733 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send transfer log to topic fds.transfer.src
-22:35:06.733 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got register log
-22:35:06.738 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Send to fds.withdraw.and.transfer.stream amount: -30
-22:35:06.738 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved register log to redis
-22:35:06.738 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got create-account log
-22:35:06.743 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Received record of DepositLog, 56225010, 100, 20200720201000
-22:35:06.743 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved create account log to redis
-22:35:06.744 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.744 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.745 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.745 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.745 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
-22:35:06.746 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
-22:35:06.746 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got withdraw log
-22:35:06.747 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send withdraw log to topic fds.withdraw.src
-22:35:06.747 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got transfer log
-22:35:06.747 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send transfer log to topic fds.transfer.src
-22:35:06.752 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 44473605, 100, 20200719101000
-22:35:06.753 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.754 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Received record of deposit, 44473605, 100, 20200720100000
-22:35:06.754 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Send to fds.withdraw.and.transfer.stream amount: -100
-22:35:06.759 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 44473605, 100, 20200719102000
-22:35:06.759 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Sent to fds.withdraw.and.transfer.stream amount: -100
-22:35:06.760 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.761 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 44473605, 100, 20200720090000
-22:35:06.763 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
-22:35:06.763 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Received record of DepositLog, 44473605, 200, 20200720101000
-22:35:06.767 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Sent to fds.withdraw.and.transfer.stream amount: -200
-22:35:07.081 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720104000
-22:35:07.098 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5173735230 -> Age: 63
-22:35:07.098 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720104000
-22:35:07.105 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 0 hours ago
-22:35:07.119 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720104500
-22:35:07.129 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5173735230 -> Age: 63
-22:35:07.129 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720104500
-22:35:07.133 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 0 hours ago
-22:35:07.136 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 300
-22:35:07.137 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720113000
-22:35:07.146 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5173735230 -> Age: 63
-22:35:07.146 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 56225010, AccId: 56225010, Amount: 150, TransTime: 20200720113000
-22:35:07.152 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 1 hours ago
-22:35:07.153 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 450
-22:35:07.154 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Total transferred: -130
-22:35:07.155 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200719101000
-22:35:07.164 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 8215169423 -> Age: 60
-22:35:07.164 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200719101000
-22:35:07.169 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -23 hours ago
-22:35:07.171 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Total transferred: -300
-22:35:07.171 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200719102000
-22:35:07.180 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 8215169423 -> Age: 60
-22:35:07.181 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200719102000
-22:35:07.186 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -23 hours ago
-22:35:07.187 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 200
-22:35:07.187 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200720090000
-22:35:07.197 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 8215169423 -> Age: 60
-22:35:07.197 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 44473605, AccId: 44473605, Amount: 100, TransTime: 20200720090000
-22:35:07.201 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -1 hours ago
-22:35:07.204 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 300
-22:35:36.258 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - total deposited amount: 450
-22:35:36.258 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedDeposit key: 56225010, value: AccId: 56225010, Amount: 450, TransTime: 20200720113000
-22:35:36.265 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - total deposited amount: 300
-22:35:36.265 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedDeposit key: 44473605, value: AccId: 44473605, Amount: 300, TransTime: 20200720090000
-22:35:36.299 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedWithdrawAndTransfer key: 56225010, value: AccId: 56225010, Amount: -130, TransTime: 20200720201000
-22:35:36.307 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedWithdrawAndTransfer key: 44473605, value: AccId: 44473605, Amount: -300, TransTime: 20200720101000
-22:35:36.335 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - join deposit: AccId: 56225010, Amount: 450, TransTime: 20200720113000, transfer: AccId: 56225010, Amount: -130, TransTime: 20200720201000
-22:35:36.335 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - ACCOUNT ID 56225010 IS NON-FRAUD!
-22:35:36.343 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - join deposit: AccId: 44473605, Amount: 300, TransTime: 20200720090000, transfer: AccId: 44473605, Amount: -300, TransTime: 20200720101000
-22:35:36.343 [stream-test-e63f0707-2b3d-48f0-afca-5794be4b7407-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - ACCOUNT ID 44473605 DETECTED AS FRAUD!
-User tMyH(8215169423)'s account 44473605 was detected as FRAUD!
+23:21:10.534 [main] ERROR com.hyunje.fds.FdsSystemApp - Start fds system
+23:21:10.773 [main] ERROR com.hyunje.fds.FdsSystemApp - Finished start every components
+23:21:11.518 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: register, json: {"_t":"RegisterLog","userId":"1352512569","userName":"L3xL","birthDate":"19561001","registerTime":"20200720010000"}
+23:21:11.526 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: create-account, json: {"_t":"CreateAccountLog","userId":"1352512569","accountId":"77967939","tradeTime":"20200720103000"}
+23:21:11.532 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"1352512569","accountId":"77967939","amount":150,"tradeTime":"20200720104000"}
+23:21:11.539 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"1352512569","accountId":"77967939","amount":150,"tradeTime":"20200720104500"}
+23:21:11.545 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"1352512569","accountId":"77967939","amount":150,"tradeTime":"20200720113000"}
+23:21:11.554 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: withdraw, json: {"_t":"withdraw","userId":"1352512569","accountId":"77967939","amount":30,"tradeTime":"20200720201100"}
+23:21:11.562 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: transfer, json: {"_t":"transfer","userId":"1352512569","accountId":"77967939","toBankName":null,"toBankAccountId":null,"toBankUserName":null,"amount":100,"tradeTime":"20200720201000"}
+23:21:11.568 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: register, json: {"_t":"RegisterLog","userId":"5202353608","userName":"MTQr","birthDate":"19591001","registerTime":"20200720090000"}
+23:21:11.575 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: create-account, json: {"_t":"CreateAccountLog","userId":"5202353608","accountId":"34833957","tradeTime":"20200720100000"}
+23:21:11.582 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5202353608","accountId":"34833957","amount":100,"tradeTime":"20200719101000"}
+23:21:11.590 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5202353608","accountId":"34833957","amount":100,"tradeTime":"20200719102000"}
+23:21:11.598 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: deposit, json: {"_t":"deposit","userId":"5202353608","accountId":"34833957","amount":100,"tradeTime":"20200720090000"}
+23:21:11.605 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: withdraw, json: {"_t":"withdraw","userId":"5202353608","accountId":"34833957","amount":100,"tradeTime":"20200720100000"}
+23:21:11.612 [Thread-5] ERROR com.hyunje.fds.TransactionGenerator - Generate log type: transfer, json: {"_t":"transfer","userId":"5202353608","accountId":"34833957","toBankName":null,"toBankAccountId":null,"toBankUserName":null,"amount":200,"tradeTime":"20200720101000"}
+23:21:11.695 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got register log
+23:21:12.068 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved register log to redis
+23:21:12.068 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got create-account log
+23:21:12.077 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved create account log to redis
+23:21:12.077 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.106 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.106 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.107 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.107 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.108 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.108 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got withdraw log
+23:21:12.117 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 77967939, 150, 20200720104000
+23:21:12.128 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send withdraw log to topic fds.withdraw.src
+23:21:12.128 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got transfer log
+23:21:12.135 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.136 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Received record of deposit, 77967939, 30, 20200720201100
+23:21:12.137 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 77967939, 150, 20200720104500
+23:21:12.138 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.138 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 77967939, 150, 20200720113000
+23:21:12.138 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.150 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send transfer log to topic fds.transfer.src
+23:21:12.150 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got register log
+23:21:12.154 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Send to fds.withdraw.and.transfer.stream amount: -30
+23:21:12.156 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved register log to redis
+23:21:12.156 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got create-account log
+23:21:12.159 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Received record of DepositLog, 77967939, 100, 20200720201000
+23:21:12.160 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Saved create account log to redis
+23:21:12.160 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.161 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.161 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.161 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.162 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got deposit log
+23:21:12.162 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send deposit log to topic fds.deposits.src
+23:21:12.162 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got withdraw log
+23:21:12.163 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send withdraw log to topic fds.withdraw.src
+23:21:12.163 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer got transfer log
+23:21:12.163 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - Send transfer log to topic fds.transfer.src
+23:21:12.168 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 34833957, 100, 20200719101000
+23:21:12.168 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.170 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Received record of deposit, 34833957, 100, 20200720100000
+23:21:12.171 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Send to fds.withdraw.and.transfer.stream amount: -100
+23:21:12.174 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 34833957, 100, 20200719102000
+23:21:12.175 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.175 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Received record of DepositLog, 34833957, 100, 20200720090000
+23:21:12.175 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Sent to fds.deposits.stream
+23:21:12.177 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Sent to fds.withdraw.and.transfer.stream amount: -100
+23:21:12.179 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Received record of DepositLog, 34833957, 200, 20200720101000
+23:21:12.179 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Sent to fds.withdraw.and.transfer.stream amount: -200
+23:21:12.240 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720104000
+23:21:12.258 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 1352512569 -> Age: 63
+23:21:12.258 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720104000
+23:21:12.264 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 0 hours ago
+23:21:12.277 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720104500
+23:21:12.288 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 1352512569 -> Age: 63
+23:21:12.288 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720104500
+23:21:12.292 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 0 hours ago
+23:21:12.294 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 300
+23:21:12.295 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720113000
+23:21:12.305 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 1352512569 -> Age: 63
+23:21:12.305 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 77967939, AccId: 77967939, Amount: 150, TransTime: 20200720113000
+23:21:12.309 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created 1 hours ago
+23:21:12.311 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 450
+23:21:12.312 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Total transferred: -130
+23:21:12.314 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200719101000
+23:21:12.323 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5202353608 -> Age: 60
+23:21:12.323 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200719101000
+23:21:12.327 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -23 hours ago
+23:21:12.329 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Total transferred: -300
+23:21:12.329 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200719102000
+23:21:12.338 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5202353608 -> Age: 60
+23:21:12.338 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200719102000
+23:21:12.345 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -23 hours ago
+23:21:12.346 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 200
+23:21:12.346 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by user age, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200720090000
+23:21:12.355 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - User: 5202353608 -> Age: 60
+23:21:12.355 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Filter by created account time, 34833957, AccId: 34833957, Amount: 100, TransTime: 20200720090000
+23:21:12.360 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Account created -1 hours ago
+23:21:12.362 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - Reduced to 300
+23:21:41.398 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - total deposited amount: 450
+23:21:41.398 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedDeposit key: 77967939, value: AccId: 77967939, Amount: 450, TransTime: 20200720113000
+23:21:41.406 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - total deposited amount: 300
+23:21:41.406 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedDeposit key: 34833957, value: AccId: 34833957, Amount: 300, TransTime: 20200720090000
+23:21:41.438 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedWithdrawAndTransfer key: 77967939, value: AccId: 77967939, Amount: -130, TransTime: 20200720201000
+23:21:41.445 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - groupedWithdrawAndTransfer key: 34833957, value: AccId: 34833957, Amount: -300, TransTime: 20200720101000
+23:21:41.471 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - join deposit: AccId: 77967939, Amount: 450, TransTime: 20200720113000, transfer: AccId: 77967939, Amount: -130, TransTime: 20200720201000
+23:21:41.471 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - ACCOUNT ID 77967939 IS NON-FRAUD!
+23:21:41.478 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - join deposit: AccId: 34833957, Amount: 300, TransTime: 20200720090000, transfer: AccId: 34833957, Amount: -300, TransTime: 20200720101000
+23:21:41.478 [stream-test-9c32fad6-c23f-417a-8627-34af20a9f8ad-StreamThread-1] ERROR com.hyunje.fds.TransactionEvaluator - ACCOUNT ID 34833957 DETECTED AS FRAUD!
+23:21:41.624 [Thread-6] ERROR com.hyunje.fds.FraudDetector - User MTQr(5202353608)'s account 34833957 was detected as FRAUD!
+
+23:23:14.294 [Thread-12] ERROR com.hyunje.fds.TransactionGenerator - Starting exit TransactionGenerator...
+23:23:14.294 [Thread-10] ERROR com.hyunje.fds.streams.DepositStreamGenerator - Starting exit DepositStreamGenerator...
+23:23:14.294 [Thread-11] ERROR com.hyunje.fds.TransactionConsumer - Starting exit TransactionConsumer...
+23:23:14.294 [Thread-7] ERROR com.hyunje.fds.FraudDetector - Starting exit FraudDetector...
+23:23:14.294 [Thread-9] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - Starting exit WithdrawStreamGenerator...
+23:23:14.294 [Thread-8] ERROR com.hyunje.fds.streams.TransferStreamGenerator - Starting exit TransferStreamGenerator...
+23:23:14.294 [Thread-1] ERROR com.hyunje.fds.streams.DepositStreamGenerator - DepositStreamGenerator is trying to close!
+23:23:14.294 [Thread-4] ERROR com.hyunje.fds.TransactionConsumer - TransactionConsumer is trying to close!
+23:23:14.294 [Thread-3] ERROR com.hyunje.fds.streams.WithdrawStreamGenerator - WithdrawStreamGenerator is trying to close!
+23:23:14.294 [Thread-6] ERROR com.hyunje.fds.FraudDetector - FraudDetector is trying to close!
+23:23:14.294 [Thread-2] ERROR com.hyunje.fds.streams.TransferStreamGenerator - TransferStreamGenerator is trying to close!
