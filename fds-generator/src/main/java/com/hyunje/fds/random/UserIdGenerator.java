@@ -9,4 +9,9 @@ public class UserIdGenerator extends AbstractStringGenerator {
         this.CHAR_STRING = "0123456789";
         this.MAX_NAME_LEN = 10;
     }
+
+    public UserIdGenerator(int maxlen){
+        this.CHAR_STRING = "0123456789";
+        this.MAX_NAME_LEN = 10;
+    }
 }

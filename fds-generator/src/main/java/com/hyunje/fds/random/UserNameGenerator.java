@@ -8,4 +8,8 @@ public class UserNameGenerator extends AbstractStringGenerator {
     public UserNameGenerator() {
         this.MAX_NAME_LEN = 16;
     }
+
+    public UserNameGenerator(int maxlen){
+        this.MAX_NAME_LEN = maxlen;
+    }
 }

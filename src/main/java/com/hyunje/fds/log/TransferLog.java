@@ -1,6 +1,6 @@
 package com.hyunje.fds.log;
 
-import com.hyunje.fds.JSONSerdeCompatible;
+import com.hyunje.fds.serdes.JSONSerdeCompatible;
 
 public class TransferLog implements JSONSerdeCompatible {
     private String userId;

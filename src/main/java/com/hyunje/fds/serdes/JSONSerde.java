@@ -1,4 +1,4 @@
-package com.hyunje.fds;
+package com.hyunje.fds.serdes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;

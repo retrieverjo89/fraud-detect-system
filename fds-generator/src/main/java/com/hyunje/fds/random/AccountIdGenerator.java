@@ -9,4 +9,9 @@ public class AccountIdGenerator extends AbstractStringGenerator {
         this.CHAR_STRING = "0123456789";
         this.MAX_NAME_LEN = 16;
     }
+
+    public AccountIdGenerator(int maxlen){
+        this.CHAR_STRING = "0123456789";
+        this.MAX_NAME_LEN = maxlen;
+    }
 }
